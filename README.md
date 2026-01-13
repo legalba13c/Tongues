@@ -1,0 +1,171 @@
+# Babel
+
+<div align="center">
+  <img src="assets/logo.png" alt="LunarTech Logo" width="200"/>
+  <br>
+  <h1>Translate Books Brilliantly</h1>
+  <br>
+  
+</div>
+
+<div align="center">
+  <img src="assets/hero_image.png" alt="Babel Dashboard" width="100%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
+</div>
+
+---
+
+## 🌍 Augmenting Human Intelligence
+
+In an era where information is abundant but often siloed by language, **Babel** stands as a bridge. We believe that knowledge should be universally accessible, regardless of the language it was originally written in.
+
+Babel is a powerful **document translation tool** that combines **Agentic OCR** with cutting-edge **Large Language Models (LLMs)** to deliver highly accurate translations. Unlike conventional translation services, Babel preserves the original formatting, layout, and structure of your documents—ensuring that complex PDFs with tables, charts, headers, and multi-column layouts are translated seamlessly.
+
+By leveraging state-of-the-art Generative AI and intelligent optical character recognition, we empower individuals to tap into vast knowledge reservoirs that were previously out of reach. Whether it's technical documentation, literary masterpieces, or academic research, Babel ensures that language is no longer a barrier to understanding.
+
+## 🚀 Mission
+
+Our mission is to democratize access to global knowledge. We are building a future where:
+- **Language is fluid**: Ideas flow freely across linguistic borders.
+- **Knowledge is universal**: Every human has the right and ability to learn from the collective wisdom of the world.
+- **Potential is unleashed**: By removing language constraints, we unlock the full creative and intellectual potential of humanity.
+
+## 🤝 Collaboration & Partners
+
+Babel is the result of a visionary collaboration led by **LunarTech**. We have partnered with industry leaders to build a robust, scalable, and intelligent system.
+
+| **LunarTech** | **Google** | **OpenAI** | **BabelDOC** |
+| :---: | :---: | :---: | :---: |
+| <img src="assets/logo.png" width="80"/> | **Cloud & Infrastructure** | **LLM Intelligence** | **Core Engine** |
+
+> "Collaboration is the essence of innovation. Together, we are redefining what is possible in the realm of cross-lingual communication."
+
+## ✨ Key Features
+
+- **Agentic OCR**: Intelligent optical character recognition that understands document structure, not just raw text.
+- **Context-Aware Translation**: Understands the nuance and context of entire documents, not just isolated sentences.
+- **Preserves Formatting**: Maintains the original layout, styling, and structure of your documents.
+- **Multi-Format Support**: Seamlessly handles PDF, DOCX, and other major document formats.
+- **Powered by LLMs**: Utilizes the latest advancements in Large Language Models for unmatched accuracy.
+- **Broad Language Support**: Supports translation across 50+ major languages.
+
+## 🌐 Supported Languages
+
+Babel currently supports high-quality translation for over 50 languages:
+
+| | | |
+|:---:|:---:|:---:|
+| English | Chinese (中文) | Hindi (हिन्दी) |
+| Arabic (العربية) | Russian (Русский) | Armenian (Հայերեն) |
+| Japanese (日本語) | German (Deutsch) | Dutch (Nederlands) |
+| Italian (Italiano) | French (Français) | Spanish (Español) |
+| Portuguese (Português) | Korean (한국어) | Turkish (Türkçe) |
+| Polish (Polski) | Vietnamese (Tiếng Việt) | Ukrainian (Українська) |
+| Romanian (Română) | Thai (ไทย) | Javanese (Jawa) |
+| Punjabi (ਪੰਜਾਬੀ) | | |
+
+## 🔄 How It Works
+
+Babel streamlines the translation process into a simple, intuitive flow:
+
+1.  **Upload**: Drag and drop your document (PDF, DOCX) into the Babel dashboard.
+2.  **Select Language**: Choose your desired target language from our supported list.
+3.  **Translate**: Our AI engine analyzes the document structure, extracts text, and translates it while preserving context and formatting.
+4.  **Download**: Receive your perfectly translated document, ready for immediate use.
+
+## 🏗️ System Architecture
+
+Babel is built on a modern, decoupled architecture designed for performance and scalability.
+
+```mermaid
+graph TD
+    User[User] -->|Uploads File| Dashboard[Frontend Dashboard]
+    Dashboard -->|POST /api/translate| API[FastAPI Backend]
+    
+    subgraph Backend Services
+        API -->|Spawns| Worker[Background Worker]
+        Worker -->|Executes| BabelDOC[BabelDOC Engine]
+    end
+    
+    subgraph BabelDOC Core
+        BabelDOC -->|1. Parse| Parser[PDF/Doc Parser]
+        BabelDOC -->|2. Extract| Extractor[Term & Text Extractor]
+        BabelDOC -->|3. Translate| LLM[OpenAI GPT-4o]
+        BabelDOC -->|4. Generate| Generator[PDF Generator]
+    end
+    
+    BabelDOC -->|Returns| File[Translated File]
+    File -->|Download Link| Dashboard
+```
+
+### Component Interaction
+1.  **Frontend (Dashboard)**: A responsive web interface built with HTML/CSS/JS that handles file uploads and status polling.
+2.  **Backend (FastAPI)**: A high-performance Python server that manages jobs, handles file I/O, and orchestrates the translation process.
+3.  **BabelDOC Engine**: The core intelligence layer that processes documents. It runs as a subprocess to ensure isolation and stability.
+
+## 🧠 Under the Hood: BabelDOC
+
+BabelDOC is the engine that powers our high-fidelity translations. Unlike standard translation tools that treat text as a flat string, BabelDOC understands **document structure**.
+
+### The Pipeline
+1.  **Layout Analysis**: BabelDOC first analyzes the PDF layout to understand headers, footers, columns, and images.
+2.  **Term Extraction**: Before translating, it extracts key terminology to ensure consistency across the entire document.
+3.  **Contextual Translation**: Text is grouped into logical blocks (paragraphs) and sent to the LLM (GPT-4o) with context, ensuring that "bank" is translated correctly whether it refers to a river or money.
+4.  **Reconstruction**: The translated text is injected back into the original layout, preserving fonts, styles, and positioning.
+
+## 🛠️ Technical Setup
+
+To run the Babel server locally, follow these steps:
+
+### Prerequisites
+- Python 3.8+ installed
+- OpenAI API Key
+
+### Installation & Startup
+
+1.  **Navigate to the backend directory**:
+    ```bash
+    cd babel-backend
+    ```
+
+2.  **Install dependencies**:
+    ```bash
+    pip install fastapi uvicorn python-multipart openai
+    ```
+
+3.  **Set your API Key**:
+    ```bash
+    # Windows (PowerShell)
+    $env:OPENAI_API_KEY="your-api-key-here"
+    
+    # Mac/Linux
+    export OPENAI_API_KEY="your-api-key-here"
+    ```
+
+4.  **Start the Server**:
+    ```bash
+    python server.py
+    ```
+
+5.  **Access the Application**:
+    Open your browser and navigate to: [http://localhost:8000/dashboard/index.html](http://localhost:8000/dashboard/index.html)
+
+Pricing (BETA)
+We offer a simple Credit-based pricing model:
+- **Starter ($49/mo)**: 500k Credits (~100 Documents)
+- **Growth ($149/mo)**: 2M Credits (~400 Documents)
+- **Business ($499/mo)**: 8M Credits (~1,600 Documents)
+
+1 Credit ≈ 10 Characters.
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ by LunarTech</sub>
+</div>
+
+### Explanation of "Tongues of Flame" Upgrade:
+- **Image Extraction and Reinsertion**: Added `extract_images_and_positions` to identify embedded images and their positions using `pymupdf`. Added `reinsert_images` to re-add them to the translated PDF at the exact positions.
+- **Bold Text Detection**: Added `check_and_preserve_bold_text` to scan the PDF for bold text (by checking font names and flags). It logs detection but relies on BabelDOC to preserve formatting in the translation output, as direct manipulation of BabelDOC's internal process isn't feasible here.
+- **Integration in `translate_file`**: Preprocessing now extracts images and checks for bold text before running BabelDOC. Postprocessing reinserts images after translation and before watermarking.
+
+These additions ensure images are preserved and bold text is detected, with preservation handled by the translation tool
