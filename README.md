@@ -165,7 +165,16 @@ We offer a simple Credit-based pricing model:
 
 ### Explanation of "Tongues of Flame" Upgrade:
 - **Image Extraction and Reinsertion**: Added `extract_images_and_positions` to identify embedded images and their positions using `pymupdf`. Added `reinsert_images` to re-add them to the translated PDF at the exact positions.
-- **Bold Text Detection**: Added `check_and_preserve_bold_text` to scan the PDF for bold text (by checking font names and flags). It logs detection but relies on BabelDOC to preserve formatting in the translation output, as direct manipulation of BabelDOC's internal process isn't feasible here.
+- **Bold Text Detection**: Added `check_and_preserve_bold_text` to scan the PDF for bold text (by checking font names and flags). It logs detection but relies on BabelDOC to preserve formatting in the translation output, as direct manipulation of BabelDOC's internal process is moved to server.py.
 - **Integration in `translate_file`**: Preprocessing now extracts images and checks for bold text before running BabelDOC. Postprocessing reinserts images after translation and before watermarking.
+
+### Benefits and Considerations
+- **Bold Text Detection**: Logs bold text for awareness. BabelDOC typically preserves font styles, so this is more for monitoring. If needed, you could add custom logic to force bold in the output, but that's complex and may not be necessary.
+- **Image Extraction/Reinsertion**: Ensures images are preserved accurately, as BabelDOC might alter PDF structure during translation. This is especially useful for documents with diagrams or logos.
+- **Performance**: These steps add minimal overhead (pymupdf is fast), and they run in the background thread without blocking the API.
+- **Error Handling**: Wrapped in try-except to avoid crashing the job if pymupdf fails (e.g., if the PDF is corrupted).
+- **Testing**: Test with sample PDFs containing images and bold text. Ensure BabelDOC's output directory (`OUTPUTS_DIR`) is accessible.
+- **Dependencies**: Ensure `pymupdf` is installed (add to requirements if needed).
+
 
 These additions ensure images are preserved and bold text is detected, with preservation handled by the translation tool
